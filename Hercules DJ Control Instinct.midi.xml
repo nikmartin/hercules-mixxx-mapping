@@ -15,8 +15,8 @@
             <control>
                 <status>0x90</status>
                 <midino>0x38</midino>
-                <group>[Playlist]</group>
-                <key>HCI.PlaylistModeFile</key>
+                <group>[play_indicatorlist]</group>
+                <key>HCI.play_indicatorlistModeFile</key>
                 <options>
                     <script-binding/>
                 </options>
@@ -24,8 +24,8 @@
             <control>
                 <status>0x90</status>
                 <midino>0x39</midino>
-                <group>[Playlist]</group>
-                <key>HCI.PlaylistModeFolder</key>
+                <group>[play_indicatorlist]</group>
+                <key>HCI.play_indicatorlistModeFolder</key>
                 <options>
                     <script-binding/>
                 </options>
@@ -33,8 +33,8 @@
             <control>
                 <status>0x90</status>
                 <midino>0x36</midino>
-                <group>[Playlist]</group>
-                <key>HCI.PlaylistPrev</key>
+                <group>[play_indicatorlist]</group>
+                <key>HCI.play_indicatorlistPrev</key>
                 <options>
                     <script-binding/>
                 </options>
@@ -42,8 +42,8 @@
             <control>
                 <status>0x90</status>
                 <midino>0x37</midino>
-                <group>[Playlist]</group>
-                <key>HCI.PlaylistNext</key>
+                <group>[play_indicatorlist]</group>
+                <key>HCI.play_indicatorlistNext</key>
                 <options>
                     <script-binding/>
                 </options>
@@ -172,19 +172,19 @@
                 <status>0xb0</status>
                 <midino>0x37</midino>
                 <group>[Channel1]</group>
-                <key>filterHigh</key>
+                <key>parameter3</key>
             </control>
             <control>
                 <status>0xb0</status>
                 <midino>0x38</midino>
                 <group>[Channel1]</group>
-                <key>filterMid</key>
+                <key>parameter2</key>
             </control>
             <control>
                 <status>0xb0</status>
                 <midino>0x39</midino>
                 <group>[Channel1]</group>
-                <key>filterLow</key>
+                <key>parameter1</key>
             </control>
             <control>
                 <status>0xb0</status>
@@ -202,19 +202,19 @@
                 <status>0xb0</status>
                 <midino>0x3c</midino>
                 <group>[Channel2]</group>
-                <key>filterHigh</key>
+                <key>parameter3</key>
             </control>
             <control>
                 <status>0xb0</status>
                 <midino>0x3d</midino>
                 <group>[Channel2]</group>
-                <key>filterMid</key>
+                <key>parameter2</key>
             </control>
             <control>
                 <status>0xb0</status>
                 <midino>0x3e</midino>
                 <group>[Channel2]</group>
-                <key>filterLow</key>
+                <key>parameter1</key>
             </control>
 
 
@@ -246,25 +246,25 @@
                 <status>0x90</status>
                 <midino>0x5</midino>
                 <group>[Sampler1]</group>
-                <key>play</key>
+                <key>play_indicator</key>
             </control>
             <control>
                 <status>0x90</status>
                 <midino>0x6</midino>
                 <group>[Sampler2]</group>
-                <key>play</key>
+                <key>play_indicator</key>
             </control>
             <control>
                 <status>0x90</status>
                 <midino>0x7</midino>
                 <group>[Sampler3]</group>
-                <key>play</key>
+                <key>play_indicator</key>
             </control>
             <control>
                 <status>0x90</status>
                 <midino>0x8</midino>
                 <group>[Sampler4]</group>
-                <key>play</key>
+                <key>play_indicator</key>
             </control>
 
             <control>
@@ -345,19 +345,19 @@
                 <status>0x90</status>
                 <midino>0x15</midino>
                 <group>[Channel1]</group>
-                <key>cue_default</key>
+                <key>cue_indicator</key>
             </control>
             <control>
                 <status>0x90</status>
                 <midino>0x16</midino>
                 <group>[Channel1]</group>
-                <key>play</key>
+                <key>play_indicator</key>
             </control>
             <control>
                 <status>0x90</status>
                 <midino>0x17</midino>
                 <group>[Channel1]</group>
-                <key>beatsync</key>
+                <key>sync_enabled</key>
             </control>
             <control>
                 <status>0x90</status>
@@ -400,7 +400,7 @@
                 <status>0x90</status>
                 <midino>0x1f</midino>
                 <group>[Sampler2]</group>
-                <key>play</key>
+                <key>play_indicator</key>
             </control>
             <control>
                 <status>0x90</status>
@@ -478,19 +478,19 @@
                 <status>0x90</status>
                 <midino>0x2f</midino>
                 <group>[Channel2]</group>
-                <key>cue_default</key>
+                <key>cue_indicator</key>
             </control>
             <control>
                 <status>0x90</status>
                 <midino>0x30</midino>
                 <group>[Channel2]</group>
-                <key>play</key>
+                <key>play_indicator</key>
             </control>
             <control>
                 <status>0x90</status>
                 <midino>0x31</midino>
                 <group>[Channel2]</group>
-                <key>beatsync</key>
+                <key>sync_enabled</key>
             </control>
             <control>
                 <status>0x90</status>
@@ -538,28 +538,28 @@
                 <status>0x90</status>
                 <midino>0x5</midino>
                 <group>[Sampler1]</group>
-                <key>play</key>
+                <key>play_indicator</key>
                 <minimum>0.5</minimum>
             </output>
             <output>
                 <status>0x90</status>
                 <midino>0x6</midino>
                 <group>[Sampler2]</group>
-                <key>play</key>
+                <key>play_indicator</key>
                 <minimum>0.5</minimum>
             </output>
             <output>
                 <status>0x90</status>
                 <midino>0x7</midino>
                 <group>[Sampler3]</group>
-                <key>play</key>
+                <key>play_indicator</key>
                 <minimum>0.5</minimum>
             </output>
             <output>
                 <status>0x90</status>
                 <midino>0x8</midino>
                 <group>[Sampler4]</group>
-                <key>play</key>
+                <key>play_indicator</key>
                 <minimum>0.5</minimum>
             </output>
             <output>
@@ -630,7 +630,7 @@
                 <status>0x90</status>
                 <midino>0x15</midino>
                 <group>[Channel1]</group>
-                <key>cue_default</key>
+                <key>cue_indicator</key>
                 <description></description>
                 <minimum>0.5</minimum>
             </output>
@@ -646,7 +646,7 @@
                 <status>0x90</status>
                 <midino>0x17</midino>
                 <group>[Channel1]</group>
-                <key>beatsync</key>
+                <key>sync_enabled</key>
                 <description></description>
                 <minimum>0.5</minimum>
             </output>
@@ -754,7 +754,7 @@
                 <status>0x90</status>
                 <midino>0x2f</midino>
                 <group>[Channel2]</group>
-                <key>cue_default</key>
+                <key>cue_indicator</key>
                 <description></description>
                 <minimum>0.5</minimum>
             </output>
@@ -770,7 +770,7 @@
                 <status>0x90</status>
                 <midino>0x31</midino>
                 <group>[Channel2]</group>
-                <key>beatsync</key>
+                <key>sync_enabled</key>
                 <description></description>
                 <minimum>0.5</minimum>
             </output>
