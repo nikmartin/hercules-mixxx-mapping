@@ -12,20 +12,40 @@
         <controls>
             <control>
                 <group>[Channel1]</group>
-                <key>loop_halve</key>
+                <key>pfl</key>
                 <status>0x90</status>
-                <midino>0x0C</midino>
+                <midino>0x18</midino>
                 <options>
                     <normal/>
                 </options>
             </control>
             <control>
                 <group>[Channel2]</group>
-                <key>LoadSelectedTrack</key>
-                <status>0x90</status>
+                <key>HCI.wheelTurn</key>
+                <description>Right JogWheel pressed and turning</description>
+                <status>0xB0</status>
                 <midino>0x33</midino>
                 <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[EffectRack1_EffectUnit2]</group>
+                <key>group_[Channel1]_enable</key>
+                <description>MIDI Learned from 4 messages.</description>
+                <status>0x90</status>
+                <midino>0x02</midino>
+                <options>
                     <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>HCI.prevNext</key>
+                <status>0x90</status>
+                <midino>0x2D</midino>
+                <options>
+                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -33,6 +53,84 @@
                 <key>sync_enabled</key>
                 <status>0x90</status>
                 <midino>0x17</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>HCI.wheelTurn</key>
+                <description>Left Jog Wheel pressed and turning</description>
+                <status>0xB0</status>
+                <midino>0x32</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[EffectRack1_EffectUnit1]</group>
+                <key>group_[Channel1]_enable</key>
+                <description>MIDI Learned from 2 messages.</description>
+                <status>0x90</status>
+                <midino>0x01</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>HCI.pitch</key>
+                <description>B Pitch -</description>
+                <status>0x90</status>
+                <midino>0x2C</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[EffectRack1_EffectUnit4]</group>
+                <key>group_[Channel2]_enable</key>
+                <description>MIDI Learned from 2 messages.</description>
+                <status>0x90</status>
+                <midino>0x1E</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>play</key>
+                <status>0x90</status>
+                <midino>0x16</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>HCI.wheelTurn</key>
+                <description>Right JogWheel turning</description>
+                <status>0xB0</status>
+                <midino>0x31</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>HCI.pitch</key>
+                <description>B Pitch -</description>
+                <status>0x90</status>
+                <midino>0x2B</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>cue_default</key>
+                <status>0x90</status>
+                <midino>0x15</midino>
                 <options>
                     <normal/>
                 </options>
@@ -49,55 +147,55 @@
             </control>
             <control>
                 <group>[Channel2]</group>
-                <key>volume</key>
-                <status>0xB0</status>
-                <midino>0x3B</midino>
+                <key>HCI.hotCue</key>
+                <status>0x90</status>
+                <midino>0x2A</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
-                <group>[Sampler2]</group>
-                <key>play</key>
+                <group>[Channel1]</group>
+                <key>HCI.prevNext</key>
                 <status>0x90</status>
-                <midino>0x06</midino>
+                <midino>0x14</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[Channel2]</group>
-                <key>back</key>
+                <key>HCI.hotCue</key>
                 <status>0x90</status>
-                <midino>0x2D</midino>
+                <midino>0x29</midino>
                 <options>
-                    <normal/>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>HCI.prevNext</key>
+                <status>0x90</status>
+                <midino>0x13</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>HCI.hotCue</key>
+                <status>0x90</status>
+                <midino>0x28</midino>
+                <options>
+                    <script-binding/>
                 </options>
             </control>
             <control>
                 <group>[Channel1]</group>
                 <key>HCI.pitch</key>
-                <description>A Pitch -</description>
+                <description>A Pitch +</description>
                 <status>0x90</status>
-                <midino>0x11</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Playlist]</group>
-                <key>HCI.playlistModeFile</key>
-                <status>0x90</status>
-                <midino>0x38</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>HCI.tempPitch</key>
-                <status>0xB0</status>
-                <midino>0x35</midino>
+                <midino>0x12</midino>
                 <options>
                     <script-binding/>
                 </options>
@@ -113,83 +211,10 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>reloop_exit</key>
-                <status>0x90</status>
-                <midino>0x0B</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>pfl</key>
-                <status>0x90</status>
-                <midino>0x32</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>play</key>
-                <status>0x90</status>
-                <midino>0x16</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Master]</group>
-                <key>crossfader</key>
-                <status>0xB0</status>
-                <midino>0x3A</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Sampler1]</group>
-                <key>play</key>
-                <status>0x90</status>
-                <midino>0x05</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
                 <key>HCI.pitch</key>
-                <description>B Pitch -</description>
+                <description>A Pitch -</description>
                 <status>0x90</status>
-                <midino>0x2C</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>HCI.hotCue</key>
-                <status>0x90</status>
-                <midino>0x10</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Playlist]</group>
-                <key>SelectNextTrack</key>
-                <description>MIDI Learned from 2 messages.</description>
-                <status>0x90</status>
-                <midino>0x37</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>HCI.tempPitch</key>
-                <status>0xB0</status>
-                <midino>0x34</midino>
+                <midino>0x11</midino>
                 <options>
                     <script-binding/>
                 </options>
@@ -205,99 +230,11 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>loop_out</key>
-                <status>0x90</status>
-                <midino>0x0A</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>sync_enabled</key>
-                <status>0x90</status>
-                <midino>0x31</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>cue_default</key>
-                <description>MIDI Learned from 4 messages.</description>
-                <status>0x90</status>
-                <midino>0x15</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[EqualizerRack1_[Channel1]_Effect1]</group>
-                <key>parameter1</key>
-                <description>EQ Low</description>
-                <status>0xB0</status>
-                <midino>0x39</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>HCI.pitch</key>
-                <description>B Pitch -</description>
-                <status>0x90</status>
-                <midino>0x2B</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
                 <key>HCI.hotCue</key>
                 <status>0x90</status>
-                <midino>0x0F</midino>
+                <midino>0x10</midino>
                 <options>
                     <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Playlist]</group>
-                <key>SelectPrevTrack</key>
-                <description>MIDI Learned from 4 messages.</description>
-                <status>0x90</status>
-                <midino>0x36</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>HCI.wheelTurn</key>
-                <description>Right JogWheel pressed and turning</description>
-                <status>0xB0</status>
-                <midino>0x33</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>HCI.wheelTouch</key>
-                <description>Left JogWheel switch </description>
-                <status>0x90</status>
-                <midino>0x1A</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[EqualizerRack1_[Channel2]_Effect1]</group>
-                <key>parameter1</key>
-                <description>EQ Low</description>
-                <status>0xB0</status>
-                <midino>0x3E</midino>
-                <options>
-                    <normal/>
                 </options>
             </control>
             <control>
@@ -311,57 +248,20 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>loop_in</key>
-                <status>0x90</status>
-                <midino>0x09</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>play</key>
-                <status>0x90</status>
-                <midino>0x30</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>fwd</key>
-                <status>0x90</status>
-                <midino>0x14</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[EqualizerRack1_[Channel1]_Effect1]</group>
-                <key>parameter2</key>
-                <description>EQ Mid</description>
-                <status>0xB0</status>
-                <midino>0x38</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Sampler2]</group>
-                <key>play</key>
-                <status>0x90</status>
-                <midino>0x1F</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
                 <key>HCI.hotCue</key>
                 <status>0x90</status>
-                <midino>0x2A</midino>
+                <midino>0x0F</midino>
                 <options>
                     <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>loop_out</key>
+                <status>0x90</status>
+                <midino>0x24</midino>
+                <options>
+                    <normal/>
                 </options>
             </control>
             <control>
@@ -374,38 +274,56 @@
                 </options>
             </control>
             <control>
-                <group>[Master]</group>
-                <key>HCI.vinylButtonHandler</key>
+                <group>[Playlist]</group>
+                <key>HCI.playlistModeFolder</key>
                 <status>0x90</status>
-                <midino>0x35</midino>
+                <midino>0x39</midino>
                 <options>
                     <script-binding/>
                 </options>
             </control>
             <control>
-                <group>[Channel1]</group>
-                <key>HCI.wheelTurn</key>
-                <description>Left Jog Wheel pressed and turning</description>
-                <status>0xB0</status>
-                <midino>0x32</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>LoadSelectedTrack</key>
+                <group>[Channel2]</group>
+                <key>loop_in</key>
                 <status>0x90</status>
-                <midino>0x19</midino>
+                <midino>0x23</midino>
                 <options>
                     <normal/>
                 </options>
             </control>
             <control>
-                <group>[Channel2]</group>
-                <key>loop_out</key>
+                <group>[EqualizerRack1_[Channel2]_Effect1]</group>
+                <key>parameter1</key>
+                <description>EQ Low</description>
+                <status>0xB0</status>
+                <midino>0x3E</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>HCI.hotCue</key>
                 <status>0x90</status>
-                <midino>0x24</midino>
+                <midino>0x0D</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Playlist]</group>
+                <key>HCI.playlistModeFile</key>
+                <status>0x90</status>
+                <midino>0x38</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>loop_halve</key>
+                <status>0x90</status>
+                <midino>0x0C</midino>
                 <options>
                     <normal/>
                 </options>
@@ -421,6 +339,118 @@
                 </options>
             </control>
             <control>
+                <group>[Playlist]</group>
+                <key>SelectNextTrack</key>
+                <status>0x90</status>
+                <midino>0x37</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>reloop_exit</key>
+                <status>0x90</status>
+                <midino>0x0B</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[EqualizerRack1_[Channel2]_Effect1]</group>
+                <key>parameter3</key>
+                <description>EQ High</description>
+                <status>0xB0</status>
+                <midino>0x3C</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Playlist]</group>
+                <key>SelectPrevTrack</key>
+                <status>0x90</status>
+                <midino>0x36</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>volume</key>
+                <status>0xB0</status>
+                <midino>0x3B</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>loop_out</key>
+                <status>0x90</status>
+                <midino>0x0A</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Master]</group>
+                <key>HCI.vinylButtonHandler</key>
+                <status>0x90</status>
+                <midino>0x35</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Sampler2]</group>
+                <key>play</key>
+                <status>0x90</status>
+                <midino>0x1F</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Master]</group>
+                <key>crossfader</key>
+                <status>0xB0</status>
+                <midino>0x3A</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>loop_in</key>
+                <status>0x90</status>
+                <midino>0x09</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>HCI.wheelTouch</key>
+                <description>Right JogWheel switch
+                </description>
+                <status>0x90</status>
+                <midino>0x34</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[EqualizerRack1_[Channel1]_Effect1]</group>
+                <key>parameter1</key>
+                <description>EQ Low</description>
+                <status>0xB0</status>
+                <midino>0x39</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
                 <group>[Sampler4]</group>
                 <key>play</key>
                 <status>0x90</status>
@@ -431,19 +461,66 @@
             </control>
             <control>
                 <group>[Channel2]</group>
-                <key>cue_default</key>
-                <description>MIDI Learned from 2 messages.</description>
+                <key>LoadSelectedTrack</key>
                 <status>0x90</status>
-                <midino>0x2F</midino>
+                <midino>0x33</midino>
                 <options>
                     <normal/>
                 </options>
             </control>
             <control>
-                <group>[Channel1]</group>
-                <key>back</key>
+                <group>[EffectRack1_EffectUnit3]</group>
+                <key>group_[Channel2]_enable</key>
+                <description>MIDI Learned from 6 messages.</description>
                 <status>0x90</status>
-                <midino>0x13</midino>
+                <midino>0x1D</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[EqualizerRack1_[Channel1]_Effect1]</group>
+                <key>parameter2</key>
+                <description>EQ Mid</description>
+                <status>0xB0</status>
+                <midino>0x38</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Sampler3]</group>
+                <key>play</key>
+                <status>0x90</status>
+                <midino>0x07</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>pfl</key>
+                <status>0x90</status>
+                <midino>0x32</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[EffectRack1_EffectUnit2]</group>
+                <key>group_[Channel2]_enable</key>
+                <description>MIDI Learned from 4 messages.</description>
+                <status>0x90</status>
+                <midino>0x1C</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Sampler2]</group>
+                <key>play</key>
+                <status>0x90</status>
+                <midino>0x06</midino>
                 <options>
                     <normal/>
                 </options>
@@ -460,105 +537,31 @@
             </control>
             <control>
                 <group>[Channel2]</group>
-                <key>HCI.hotCue</key>
+                <key>sync_enabled</key>
                 <status>0x90</status>
-                <midino>0x29</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>HCI.hotCue</key>
-                <status>0x90</status>
-                <midino>0x0D</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>HCI.wheelTouch</key>
-                <description>Right JogWheel switch </description>
-                <status>0x90</status>
-                <midino>0x34</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>HCI.wheelTurn</key>
-                <description>Right JogWheel turning</description>
-                <status>0xB0</status>
                 <midino>0x31</midino>
                 <options>
-                    <script-binding/>
+                    <normal/>
                 </options>
             </control>
             <control>
-                <group>[Channel1]</group>
-                <key>pfl</key>
+                <group>[EffectRack1_EffectUnit1]</group>
+                <key>group_[Channel2]_enable</key>
+                <description>MIDI Learned from 2 messages.</description>
                 <status>0x90</status>
-                <midino>0x18</midino>
+                <midino>0x1B</midino>
                 <options>
                     <normal/>
                 </options>
             </control>
             <control>
-                <group>[Channel2]</group>
-                <key>loop_in</key>
-                <status>0x90</status>
-                <midino>0x23</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[EqualizerRack1_[Channel2]_Effect1]</group>
-                <key>parameter3</key>
-                <description>EQ High</description>
-                <status>0xB0</status>
-                <midino>0x3C</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Sampler3]</group>
+                <group>[Sampler1]</group>
                 <key>play</key>
+                <description>MIDI Learned from 2 messages.</description>
                 <status>0x90</status>
-                <midino>0x07</midino>
+                <midino>0x05</midino>
                 <options>
                     <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel2]</group>
-                <key>fwd</key>
-                <status>0x90</status>
-                <midino>0x2E</midino>
-                <options>
-                    <normal/>
-                </options>
-            </control>
-            <control>
-                <group>[Channel1]</group>
-                <key>HCI.pitch</key>
-                <description>A Pitch +</description>
-                <status>0x90</status>
-                <midino>0x12</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
-            <control>
-                <group>[Playlist]</group>
-                <key>HCI.playlistModeFolder</key>
-                <status>0x90</status>
-                <midino>0x39</midino>
-                <options>
-                    <script-binding/>
                 </options>
             </control>
             <control>
@@ -572,15 +575,147 @@
             </control>
             <control>
                 <group>[Channel2]</group>
-                <key>HCI.hotCue</key>
+                <key>play</key>
                 <status>0x90</status>
-                <midino>0x28</midino>
+                <midino>0x30</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>HCI.wheelTouch</key>
+                <description>Left JogWheel switch
+                </description>
+                <status>0x90</status>
+                <midino>0x1A</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>HCI.tempPitch</key>
+                <status>0xB0</status>
+                <midino>0x35</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[EffectRack1_EffectUnit4]</group>
+                <key>group_[Channel1]_enable</key>
+                <description>MIDI Learned from 8 messages.</description>
+                <status>0x90</status>
+                <midino>0x04</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>cue_default</key>
+                <status>0x90</status>
+                <midino>0x2F</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>LoadSelectedTrack</key>
+                <status>0x90</status>
+                <midino>0x19</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel1]</group>
+                <key>HCI.tempPitch</key>
+                <status>0xB0</status>
+                <midino>0x34</midino>
+                <options>
+                    <script-binding/>
+                </options>
+            </control>
+            <control>
+                <group>[EffectRack1_EffectUnit3]</group>
+                <key>group_[Channel1]_enable</key>
+                <description>MIDI Learned from 6 messages.</description>
+                <status>0x90</status>
+                <midino>0x03</midino>
+                <options>
+                    <normal/>
+                </options>
+            </control>
+            <control>
+                <group>[Channel2]</group>
+                <key>HCI.prevNext</key>
+                <status>0x90</status>
+                <midino>0x2E</midino>
                 <options>
                     <script-binding/>
                 </options>
             </control>
         </controls>
         <outputs>
+            <output>
+                <group>[EffectRack1_EffectUnit1]</group>
+                <key>group_[Channel1]_enable</key>
+                <status>0x90</status>
+                <midino>0x01</midino>
+                <minimum>0.5</minimum>
+            </output>
+            <output>
+                <group>[EffectRack1_EffectUnit2]</group>
+                <key>group_[Channel1]_enable</key>
+                <status>0x90</status>
+                <midino>0x02</midino>
+                <minimum>0.5</minimum>
+            </output>
+            <output>
+                <group>[EffectRack1_EffectUnit3]</group>
+                <key>group_[Channel1]_enable</key>
+                <status>0x90</status>
+                <midino>0x03</midino>
+                <minimum>0.5</minimum>
+            </output>
+            <output>
+                <group>[EffectRack1_EffectUnit4]</group>
+                <key>group_[Channel1]_enable</key>
+                <status>0x90</status>
+                <midino>0x04</midino>
+                <minimum>0.5</minimum>
+            </output>
+            <output>
+                <group>[EffectRack1_EffectUnit1]</group>
+                <key>group_[Channel2]_enable</key>
+                <status>0x90</status>
+                <midino>0x1B</midino>
+                <minimum>0.5</minimum>
+            </output>
+            <output>
+                <group>[EffectRack1_EffectUnit2]</group>
+                <key>group_[Channel2]_enable</key>
+                <status>0x90</status>
+                <midino>0x1C</midino>
+                <minimum>0.5</minimum>
+            </output>
+            <output>
+                <group>[EffectRack1_EffectUnit3]</group>
+                <key>group_[Channel2]_enable</key>
+                <status>0x90</status>
+                <midino>0x1D</midino>
+                <minimum>0.5</minimum>
+            </output>
+            <output>
+                <group>[EffectRack1_EffectUnit4]</group>
+                <key>group_[Channel2]_enable</key>
+                <status>0x90</status>
+                <midino>0x1E</midino>
+                <minimum>0.5</minimum>
+            </output>
             <output>
                 <group>[Channel2]</group>
                 <key>hotcue_1_enabled</key>
@@ -614,13 +749,6 @@
                 <key>sync_enabled</key>
                 <status>0x90</status>
                 <midino>0x17</midino>
-                <minimum>1</minimum>
-            </output>
-            <output>
-                <group>[EffectRack1_EffectUnit3]</group>
-                <key>group_[Channel2]_enable</key>
-                <status>0x90</status>
-                <midino>0x1D</midino>
                 <minimum>0.5</minimum>
             </output>
             <output>
@@ -631,13 +759,6 @@
                 <minimum>0.5</minimum>
             </output>
             <output>
-                <group>[EffectRack1_EffectUnit3]</group>
-                <key>group_[Channel1]_enable</key>
-                <status>0x90</status>
-                <midino>0x03</midino>
-                <minimum>0.5</minimum>
-            </output>
-            <output>
                 <group>[Sampler1]</group>
                 <key>play_indicator</key>
                 <status>0x90</status>
@@ -645,24 +766,10 @@
                 <minimum>0.5</minimum>
             </output>
             <output>
-                <group>[EffectRack1_EffectUnit2]</group>
-                <key>group_[Channel2]_enable</key>
-                <status>0x90</status>
-                <midino>0x1C</midino>
-                <minimum>0.5</minimum>
-            </output>
-            <output>
                 <group>[Sampler4]</group>
                 <key>play_indicator</key>
                 <status>0x90</status>
                 <midino>0x08</midino>
-                <minimum>0.5</minimum>
-            </output>
-            <output>
-                <group>[EffectRack1_EffectUnit2]</group>
-                <key>group_[Channel1]_enable</key>
-                <status>0x90</status>
-                <midino>0x02</midino>
                 <minimum>0.5</minimum>
             </output>
             <output>
@@ -701,17 +808,17 @@
                 <minimum>0.5</minimum>
             </output>
             <output>
-                <group>[Channel1]</group>
-                <key>hotcue_3_enabled</key>
-                <status>0x90</status>
-                <midino>0x0F</midino>
-                <minimum>0.5</minimum>
-            </output>
-            <output>
                 <group>[Channel2]</group>
                 <key>reloop_exit</key>
                 <status>0x90</status>
                 <midino>0x25</midino>
+                <minimum>0.5</minimum>
+            </output>
+            <output>
+                <group>[Channel1]</group>
+                <key>hotcue_3_enabled</key>
+                <status>0x90</status>
+                <midino>0x0F</midino>
                 <minimum>0.5</minimum>
             </output>
             <output>
@@ -736,24 +843,10 @@
                 <minimum>0.5</minimum>
             </output>
             <output>
-                <group>[EffectRack1_EffectUnit4]</group>
-                <key>group_[Channel2]_enable</key>
-                <status>0x90</status>
-                <midino>0x1E</midino>
-                <minimum>0.5</minimum>
-            </output>
-            <output>
                 <group>[Channel2]</group>
                 <key>pfl</key>
                 <status>0x90</status>
                 <midino>0x32</midino>
-                <minimum>0.5</minimum>
-            </output>
-            <output>
-                <group>[EffectRack1_EffectUnit4]</group>
-                <key>group_[Channel1]_enable</key>
-                <status>0x90</status>
-                <midino>0x04</midino>
                 <minimum>0.5</minimum>
             </output>
             <output>
@@ -768,27 +861,13 @@
                 <key>sync_enabled</key>
                 <status>0x90</status>
                 <midino>0x31</midino>
-                <minimum>1</minimum>
+                <minimum>0.5</minimum>
             </output>
             <output>
                 <group>[Sampler3]</group>
                 <key>play_indicator</key>
                 <status>0x90</status>
                 <midino>0x07</midino>
-                <minimum>0.5</minimum>
-            </output>
-            <output>
-                <group>[EffectRack1_EffectUnit1]</group>
-                <key>group_[Channel2]_enable</key>
-                <status>0x90</status>
-                <midino>0x1B</midino>
-                <minimum>0.5</minimum>
-            </output>
-            <output>
-                <group>[EffectRack1_EffectUnit1]</group>
-                <key>group_[Channel1]_enable</key>
-                <status>0x90</status>
-                <midino>0x01</midino>
                 <minimum>0.5</minimum>
             </output>
             <output>

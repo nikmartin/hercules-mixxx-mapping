@@ -1,21 +1,25 @@
 // http://ts.hercules.com/download/sound/manuals/DJ_Instinct/QSG/DJCInstinct_Technical_specifications.pdf
 
+// 0x80 = Note Off
+// 0x90 = Note On
+
 function HCI () {}
 
 // ----------   Global variables    ----------
 //               [decka, deckb]
 HCI.scratching = [false, false];
 HCI.pitchSpeedFast = true; // temporary Pitch Speed of +/-  true =
-HCI.vinylButton = false;
+HCI.vinylMode = false;
 HCI.pitchSwitches = [];
 HCI.pitchSwitches['A'] = [0, 0];
 HCI.pitchSwitches['B'] = [0, 0];
-
-HCI.pitchB = [0, 0];
-
+HCI.prevNextSwitches = [];
+HCI.prevNextSwitches['A'] = [0, 0];
+HCI.prevNextSwitches['B'] = [0, 0];
 HCI.PlaylistMode = 'File';
 HCI.timerPlaylist = false;
-
+var debugEnable = false;
+var klTimer = false;
 // ----------   Functions    ----------
 
 // called when the MIDI device is opened & set up
@@ -25,10 +29,12 @@ HCI.init = function (id, debugging) {
   HCI.jogFastPosition = [0, 0];
 
   HCI.allLedOff();
-  midi.sendShortMsg(0x80, 0x39, 0x00); // LED Folder
-  midi.sendShortMsg(0x90, 0x38, 0x7F); // LED File
 
-  print('***** Hercules DJ Instinct S Control id: "' + id + '" initialized.');
+  midi.sendShortMsg(0x90, 0x39, 0x00); // LED Folder
+  midi.sendShortMsg(0x90, 0x38, 0x7F); // LED File
+  debugEnable = debugging;
+
+  print('***** Hercules DJ Instinct S Control id: "' + id + '" initialized with debugging:' + debugging);
 };
 
 // Called when the MIDI device is closed
@@ -41,21 +47,34 @@ HCI.shutdown = function (id) {
 
 HCI.allLedOff = function () {
   // Switch off all LEDs
+  for (var i = 0; i < 60; i++) {
+    midi.sendShortMsg(0x90, i, 0x00);
+  }
+};
+
+HCI.allLedOn = function () {
+  // Switch off all LEDs
+  for (var i = 0; i < 60; i++) {
+    midi.sendShortMsg(0x90, i, 0x7F);
+  }
 };
 
 function debug (msg, channel, control, value, status, group) {
-  group = group || '-';
-  print(msg + ' channel:' + channel + ' control:' + control + ' value:' + value + ' status: ' + status + ' group:' + group);
+  if (debugEnable) {
+    msg = msg || 'msg:';
+    group = group || '-';
+    print(msg + ' channel:' + channel + ' control:' + control + ' value:' + value + ' status: ' + status + ' group:' + group);
+  }
 }
 
 // Use VinylButton as "Shift"-Button
 HCI.vinylButtonHandler = function (channel, control, value, status) {
   if (value === ButtonState.pressed) {
-    HCI.vinylButton = true;
+    HCI.vinylMode = true;
     midi.sendShortMsg(0x90, 0x35, 0x7F); // LED Scratchmode
     print('***** Scratch Mode ON');
   } else {
-    HCI.vinylButton = false;
+    HCI.vinylMode = false;
     midi.sendShortMsg(0x80, 0x35, 0x00); // LED Scratchmode
     print('***** Scratch Mode OFF');
   }
@@ -75,7 +94,7 @@ HCI.wheelTouch = function (channel, control, value, status) {
     case 26: // deck A
       if (value === 0x7F && !HCI.scratching[0]) { // catch only first touch
 
-        engine.scratchEnable(1, 128, speed, alpha, beta);
+        engine.scratchEnable(1, 128, speed, alpha, beta, true);
         // Keep track of whether we're scratching on this virtual deck
         HCI.scratching[0] = true;
       } else { //  button up
@@ -93,9 +112,9 @@ HCI.wheelTouch = function (channel, control, value, status) {
         engine.scratchDisable(2);
         HCI.scratching[1] = false;
       }
+      break;
     default:
       break;
-
   }
 };
 
@@ -104,19 +123,10 @@ HCI.wheelTurn = function (channel, control, value, status, group) {
   /*
   control 48 = Deck A
   control 49 = Deck B
+  0x01 = forward
+  0x7F = backward
   */
   // print('playing? ' + engine.getValue(group, 'play'))
-  // See if we're  scratching.
-  if (!HCI.scratching[0] && !HCI.scratching[1]) {
-    if (!engine.getValue(group, 'play')) {
-      if (value === 1) {
-        engine.setValue('[Playlist]', 'SelectNextTrack', true);
-      } else {
-        engine.setValue('[Playlist]', 'SelectPrevTrack', true);
-      }
-    }
-    return;
-  }
 
   var newValue;
   if (value - 64 > 0) {
@@ -124,14 +134,44 @@ HCI.wheelTurn = function (channel, control, value, status, group) {
   }  else {
     newValue = value;
   }
+
+  // See if we're  scratching.
+  if (!HCI.scratching[0] && !HCI.scratching[1]) {
+    if (!engine.getValue(group, 'play')) { // if not playing, use jog wheel as track select
+      if (value === 1) {
+        engine.setValue('[Playlist]', 'SelectNextTrack', true);
+      } else {
+        engine.setValue('[Playlist]', 'SelectPrevTrack', true);
+      }
+    } else { // lets jog since we're playing
+      var keyLockWasOn = engine.getValue(group, 'keylock');
+      if (!keyLockWasOn) {
+        keyLockWasOn = false;
+        engine.setValue(group, 'keylock', 1);
+      }else {
+        keyLockWasOn = true;
+      }
+      engine.setValue(group, 'jog', newValue);
+
+      if (!keyLockWasOn) { // keylock wasnt on, so kill it
+        if (!klTimer) { // kill the kelyock after a short while, as it uses a LOT of CPU
+          engine.beginTimer(5000, function () {
+            engine.setValue(group, 'keylock', 0);
+            klTimer = false;
+          }, true);
+          klTimer = true;
+        }
+      }
+    }
+    return;
+  }
+
   switch (control) {
     case 50: // deck a
       engine.scratchTick(1, newValue);
       break;
     case 51: // deckb
       engine.scratchTick(2, newValue);
-      break;
-    default:
       break;
   }
 };
@@ -203,6 +243,51 @@ HCI.tempPitch = function (midino, control, value, status, group) {
   }
   print(rate);
   script.toggleControl(group, rate);
+};
+
+HCI.prevNext = function (midino, control, value, status, group) {
+  debug('PrevNext:', midino, control, value, status, group);
+
+  var state = (value === 127) ? 1 : 0;
+  switch (control) {
+    case 0x13:
+      HCI.prevNextSwitches['A'][0] = state;
+      engine.setValue(group, 'back' , state);
+      break;
+    case 0x14:
+      HCI.prevNextSwitches['A'][1] = state;
+      engine.setValue(group, 'fwd', state);
+      break;
+    case 0x2D:
+      HCI.prevNextSwitches['B'][0] = state;
+      engine.setValue(group, 'back', state);
+      break;
+    case 0x2E:
+      HCI.prevNextSwitches['B'][1] = state;
+      engine.setValue(group, 'fwd', state);
+      break;
+  }
+  // when buttons Rev and vinylMode pressed simultanously
+  if (HCI.prevNextSwitches['A'][0] && HCI.vinylMode) {
+    print('CENSOR!');
+    engine.setValue(group, 'back' , 0);
+    engine.setValue(group, 'fwd', 0);
+    engine.setValue(group, 'reverseroll', 1);
+  } else {
+    print('UNCENSOR!');
+    engine.setValue('[Channel1]', 'reverseroll', 0);
+  }
+
+  // when buttons Rev and vinylMode pressed simultanously
+  if (HCI.prevNextSwitches['B'][0] && HCI.vinylMode) {
+    print('CENSOR!');
+    engine.setValue(group, 'back' , 0);
+    engine.setValue(group, 'fwd', 0);
+    engine.setValue(group, 'reverseroll', 1);
+  } else {
+    print('UNCENSOR!');
+    engine.setValue('[Channel2]', 'reverseroll', 0);
+  }
 };
 
 HCI.playlistModeFolder = function (channel, control, value, status, group) {
@@ -277,7 +362,7 @@ HCI.PlaylistNext = function (channel, control, value, status, group) {
 };
 
 HCI.hotCue = function (midino, control, value, status, group) {
-  print('HCI.hotCue ' + midino + ',' + control + ',' + value + ',' + status + ',' + group + '#');
+  debug('HCI.hotCue: ', midino, control, value, status, group);
   var number = 1;
   if (control === 0xe || control === 0x28) {
     number = 2;
