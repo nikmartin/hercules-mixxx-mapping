@@ -114,12 +114,6 @@ HCI.wheelTurn = function (channel, control, value, status, group) {
       } else {
         engine.setValue('[Playlist]', 'SelectPrevTrack', true);
       }
-    } else { // playing, so temp pitch bend
-      if (value === 127) {
-        HCI.tempPitch(channel, control, 127, status, group);
-      }else {
-        HCI.tempPitch(channel, control, 1, status, group);
-      }
     }
     return;
   }
@@ -204,12 +198,11 @@ HCI.pitch = function (midino, control, value, status, group) {
 HCI.tempPitch = function (midino, control, value, status, group) {
   debug('tempPitch: ', midino, control, value, status, group);
   var rate = (value === 127) ? 'rate_temp_down' : 'rate_temp_up';
-  // if (HCI.vinylButton === false) {
-  //  rate = rate + '_small'
-  //  }
+  if (HCI.vinylButton === false) {
+    rate = rate + '_small';
+  }
   print(rate);
-  engine.setValue(group, rate, 1);
-  engine.setValue(group, rate, 0);
+  script.toggleControl(group, rate);
 };
 
 HCI.playlistModeFolder = function (channel, control, value, status, group) {
