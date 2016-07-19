@@ -1,7 +1,7 @@
 MIXXX Controller mapping for Hercules DJ Controller Instinct (S)
 ================================================================
 
-###v1.0.0
+###v1.0.1
 
 Original by [Stephan Martin](https://github.com/ratte/mixxxcontrollermapping)
 
