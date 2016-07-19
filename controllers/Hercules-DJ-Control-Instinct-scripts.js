@@ -1,3 +1,4 @@
+/* global midi, engine, print, ButtonState, script */
 // http://ts.hercules.com/download/sound/manuals/DJ_Instinct/QSG/DJCInstinct_Technical_specifications.pdf
 
 // 0x80 = Note Off
@@ -93,7 +94,6 @@ HCI.wheelTouch = function (channel, control, value, status) {
   switch (control) {
     case 26: // deck A
       if (value === 0x7F && !HCI.scratching[0]) { // catch only first touch
-
         engine.scratchEnable(1, 128, speed, alpha, beta, true);
         // Keep track of whether we're scratching on this virtual deck
         HCI.scratching[0] = true;
@@ -104,7 +104,6 @@ HCI.wheelTouch = function (channel, control, value, status) {
       break;
     case 52: // deck B
       if (value === 0x7F && !HCI.scratching[1]) { // catch only first touch
-
         engine.scratchEnable(2, 128, 33 + 1 / 3, alpha, beta);
         // Keep track of whether we're scratching on this virtual deck
         HCI.scratching[1] = true;
@@ -126,12 +125,10 @@ HCI.wheelTurn = function (channel, control, value, status, group) {
   0x01 = forward
   0x7F = backward
   */
-  // print('playing? ' + engine.getValue(group, 'play'))
-
   var newValue;
   if (value - 64 > 0) {
     newValue = value - 128; // 7F, 7E, 7D
-  }  else {
+  } else {
     newValue = value;
   }
 
@@ -148,7 +145,7 @@ HCI.wheelTurn = function (channel, control, value, status, group) {
       if (!keyLockWasOn) {
         keyLockWasOn = false;
         engine.setValue(group, 'keylock', 1);
-      }else {
+      } else {
         keyLockWasOn = true;
       }
       engine.setValue(group, 'jog', newValue);
@@ -179,13 +176,13 @@ HCI.wheelTurn = function (channel, control, value, status, group) {
 HCI.knobIncrement = function (group, action, minValue, maxValue, centralValue, step, sign) {
   // This function allows you to increment a non-linear value like the volume's knob
   // sign must be 1 for positive increment, -1 for negative increment
-  semiStep = step / 2;
-  rangeWidthLeft = centralValue - minValue;
-  rangeWidthRight = maxValue - centralValue;
-  actual = engine.getValue(group, action);
-
+  var semiStep = step / 2;
+  var rangeWidthLeft = centralValue - minValue;
+  var rangeWidthRight = maxValue - centralValue;
+  var actual = engine.getValue(group, action);
+  var newValue;
   if (actual < 1) {
-    increment = ((rangeWidthLeft) / semiStep) * sign;
+    var increment = ((rangeWidthLeft) / semiStep) * sign;
   } else if (actual > 1) {
     increment = ((rangeWidthRight) / semiStep) * sign;
   } else if (actual === 1) {
@@ -252,7 +249,7 @@ HCI.prevNext = function (midino, control, value, status, group) {
   switch (control) {
     case 0x13:
       HCI.prevNextSwitches['A'][0] = state;
-      engine.setValue(group, 'back' , state);
+      engine.setValue(group, 'back', state);
       break;
     case 0x14:
       HCI.prevNextSwitches['A'][1] = state;
@@ -270,7 +267,7 @@ HCI.prevNext = function (midino, control, value, status, group) {
   // when buttons Rev and vinylMode pressed simultanously
   if (HCI.prevNextSwitches['A'][0] && HCI.vinylMode) {
     print('CENSOR!');
-    engine.setValue(group, 'back' , 0);
+    engine.setValue(group, 'back', 0);
     engine.setValue(group, 'fwd', 0);
     engine.setValue(group, 'reverseroll', 1);
   } else {
@@ -281,7 +278,7 @@ HCI.prevNext = function (midino, control, value, status, group) {
   // when buttons Rev and vinylMode pressed simultanously
   if (HCI.prevNextSwitches['B'][0] && HCI.vinylMode) {
     print('CENSOR!');
-    engine.setValue(group, 'back' , 0);
+    engine.setValue(group, 'back', 0);
     engine.setValue(group, 'fwd', 0);
     engine.setValue(group, 'reverseroll', 1);
   } else {
@@ -304,7 +301,7 @@ HCI.playlistModeFolder = function (channel, control, value, status, group) {
 };
 
 HCI.playlistModeFile = function (channel, control, value, status, group) {
-  debug('playlistModeFile: ' , channel, control, value, status, group);
+  debug('playlistModeFile: ', channel, control, value, status, group);
   if (value === 0x7F) { // Button pressed
     if (HCI.PlaylistMode === 'File') {
       engine.setValue(group, 'LoadSelectedIntoFirstStopped', true);
@@ -371,7 +368,6 @@ HCI.hotCue = function (midino, control, value, status, group) {
   } else if (control === 0x10 || control === 0x2a) {
     number = 4;
   }
-
   var action = 'hotcue_' + number + '_';
   if (HCI.vinylButton === false) {
     action += 'activate';

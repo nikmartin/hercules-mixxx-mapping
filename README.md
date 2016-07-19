@@ -1,62 +1,54 @@
-MIXXX Controller mapping for Hercules DJ Controller Instinct
+MIXXX Controller mapping for Hercules DJ Controller Instinct (S)
+================================================================
 
-@author: Stephan Martin
-@date: Juli 2014
-@discussion: http://www.mixxx.org/forums/viewtopic.php?f=7&t=3907
-http://mixxx.org/
+Original by [Stephan Martin](https://github.com/ratte/mixxxcontrollermapping)
 
-cleanup and additions to the work of mich@softwareschneiderei.ch
+##Description of Mappings
 
+###Hot Cue
+All Mode Lights off = HotCue Mode
+1-4 : Select/Store Hotcue 1-4
+Vinyl + 1-4 : Delete Hotcue 1-4
 
-
-Description of Mappings
-===============
-
-Hot Cue
-=======
-(click MODE -> off = Cue Mode)
-1,2 : Select/Store Hotcue 1,2
-3,4 : Delete Hotcue 1,2
-
-Loop
-=====
+###Loop
 1,2 loop in / out
-3: halve looping time
-4: looping off
+3: halve looping length
+4: double loop length
+Vinyl + 1 = Clear loop
+Vinyl + 2 = Move Loop 1 Beat Right
+Vinly + 3 = Move Loop 1 Beat Left
 
-Headpone Plus/Minus Buttons:
-==================
-Buttons are not mapped. The Controller takes care of adjusting the volume 
-of the controllers headphone plug. Mixxx also adjustes the volume independend 
+###Headphone Plus/Minus Buttons:
+Buttons are not mapped. The Instinct Controller takes care of adjusting the volume
+of the controllers headphone plug. Mixxx also adjusts the volume independent
 of the controller.
 
-Pitch
-====
-To have a more precide way to work, Pitching makes fine tuning, Plus/Minus Buttons are temporary 
-pitchings. 
+###Pitch
+Pitch is broken slightly broken now.
 Pressing Plus- and Minus-Buttons together resets the Pitch to Zero.
-(Feel free to change  :)
+What should happen is the pitch toggle changes pitch, and the pitch buttons temporarily change pitch
 
+###Jogwheels
+Jogwheels have three functions, based on the state of the deck:
 
+* Deck is playing:
+** Turning wheel enables keylock, then jogs track for beat matching, then disables keylock (if it wasn't enabled)
+** Turning Wheel while pressing platter Scratches
+* Deck is not playing:
+** Turning wheel scrolls the library
+** Turning wheel while pressing scratches
+
+###Effects
+Effects buttons enable the corresponding effect unit on that deck. No oth
 
 Todo:
 =====
 
-7) Headphone +- Switches -> Headphone-Volume
-8) Effects
-9) Better Looping Mappings
-10) Simulate Gain with Vinyl + Pitch
-11) Simulate Mastervolume with Headphone-+ & Vinyl
-12) Image for Documentation of Mappings / Wiki
+* Headphone +- Switches -> Headphone-Volume
+* Effects
+* Better Looping Mappings
+* Gain with Vinyl + Pitch
+* Master volume with Headphone -/+ & Vinyl
+* Image for Documentation of Mappings / Wiki
 
-Done:
-=====
-1) Automapping
-2) Jog Wheels
-3) Pitch +/- & PitchSwitch
-4) Pitch - and + simultaneously = Reset Pitch to Zero
-5) Hotcue Deletions
-    1,2,3,4 : Select/Store Hotcue 1,2,3,4
-    Vinyl + 1,2,3,4 : Delete Hotcue
-6) LED's     
-13) Playlist Navigation
+Please open an Issue for any feature request or bugs found
