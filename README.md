@@ -10,17 +10,17 @@ Original by [Stephan Martin](https://github.com/ratte/mixxxcontrollermapping)
 ##Description of Mappings
 
 ###Hot Cue
-All Mode Lights off = HotCue Mode
-1-4 : Select/Store Hotcue 1-4
-Vinyl + 1-4 : Delete Hotcue 1-4
+* All Mode Lights off = HotCue Mode
+* 1-4 : Select/Store Hotcue 1-4
+* Vinyl + 1-4 : Delete Hotcue 1-4
 
 ###Loop (Not Complete)
-1,2 loop in / out
-3: halve looping length
-4: double loop length
-Vinyl + 1 = Clear loop
-Vinyl + 2 = Move Loop 1 Beat Right
-Vinly + 3 = Move Loop 1 Beat Left
+* 1,2 loop in / out
+* 3: halve looping length
+* 4: double loop length
+* Vinyl + 1 = Clear loop
+* Vinyl + 2 = Move Loop 1 Beat Right
+* Vinyl + 3 = Move Loop 1 Beat Left
 
 ###Headphone Plus/Minus Buttons:
 Buttons are not mapped. The Instinct Controller takes care of adjusting the volume
@@ -36,11 +36,11 @@ What should happen is the pitch toggle changes pitch, and the pitch buttons temp
 Jogwheels have three functions, based on the state of the deck:
 
 * Deck is playing:
-** Turning wheel enables keylock, then jogs track for beat matching, then disables keylock (if it wasn't enabled)
-** Turning Wheel while pressing platter Scratches
+  * Turning wheel enables keylock, then jogs track for beat matching, then disables keylock (if it wasn't enabled)
+  * Turning Wheel while pressing platter Scratches
 * Deck is not playing:
-** Turning wheel scrolls the library
-** Turning wheel while pressing scratches
+  * Turning wheel scrolls the library
+  * Turning wheel while pressing scratches
 
 ###Effects
 Effects buttons enable the corresponding effect unit on that deck. No oth
