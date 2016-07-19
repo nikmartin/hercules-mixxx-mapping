@@ -1,7 +1,11 @@
 MIXXX Controller mapping for Hercules DJ Controller Instinct (S)
 ================================================================
 
+###v1.0.0
+
 Original by [Stephan Martin](https://github.com/ratte/mixxxcontrollermapping)
+
+
 
 ##Description of Mappings
 
@@ -10,7 +14,7 @@ All Mode Lights off = HotCue Mode
 1-4 : Select/Store Hotcue 1-4
 Vinyl + 1-4 : Delete Hotcue 1-4
 
-###Loop
+###Loop (Not Complete)
 1,2 loop in / out
 3: halve looping length
 4: double loop length
@@ -40,6 +44,10 @@ Jogwheels have three functions, based on the state of the deck:
 
 ###Effects
 Effects buttons enable the corresponding effect unit on that deck. No oth
+
+###Miscellaneous Mappings
+Censor (reverseroll) with Vinyl + Rewind Button (<<)
+
 
 Todo:
 =====

@@ -1,4 +1,11 @@
-/* global midi, engine, print, ButtonState, script */
+/*
+  global engine
+  global script
+  global print
+  global midi
+  global ButtonState
+*/
+
 // http://ts.hercules.com/download/sound/manuals/DJ_Instinct/QSG/DJCInstinct_Technical_specifications.pdf
 
 // 0x80 = Note Off
@@ -9,7 +16,6 @@ function HCI () {}
 // ----------   Global variables    ----------
 //               [decka, deckb]
 HCI.scratching = [false, false];
-HCI.pitchSpeedFast = true; // temporary Pitch Speed of +/-  true =
 HCI.vinylMode = false;
 HCI.pitchSwitches = [];
 HCI.pitchSwitches['A'] = [0, 0];
@@ -17,31 +23,27 @@ HCI.pitchSwitches['B'] = [0, 0];
 HCI.prevNextSwitches = [];
 HCI.prevNextSwitches['A'] = [0, 0];
 HCI.prevNextSwitches['B'] = [0, 0];
-HCI.PlaylistMode = 'File';
+HCI.playlistMode = 'File';
 HCI.timerPlaylist = false;
-var debugEnable = false;
-var klTimer = false;
+HCI.debugEnable = false;
+HCI.keyLockTimer = false;
 // ----------   Functions    ----------
 
 // called when the MIDI device is opened & set up
 HCI.init = function (id, debugging) {
   HCI.id = id;
-  HCI.FastPosition = [0, 0];
-  HCI.jogFastPosition = [0, 0];
-
   HCI.allLedOff();
-
   midi.sendShortMsg(0x90, 0x39, 0x00); // LED Folder
   midi.sendShortMsg(0x90, 0x38, 0x7F); // LED File
-  debugEnable = debugging;
+  HCI.debugEnable = debugging;
 
-  print('***** Hercules DJ Instinct S Control id: "' + id + '" initialized with debugging:' + debugging);
+  print('***** Hercules DJControl Instinct S id: "' + id + '" initialized with debugging:' + debugging);
 };
 
 // Called when the MIDI device is closed
 HCI.shutdown = function (id) {
   HCI.allLedOff();
-  print('***** Hercules DJ Instinct Control S id: "' + id + '" shutdown.');
+  print('***** Hercules DJControl Instinct S id: "' + id + '" shutdown.');
 };
 
 // === MISC TO MANAGE LEDS ===
@@ -61,7 +63,7 @@ HCI.allLedOn = function () {
 };
 
 function debug (msg, channel, control, value, status, group) {
-  if (debugEnable) {
+  if (HCI.debugEnable) {
     msg = msg || 'msg:';
     group = group || '-';
     print(msg + ' channel:' + channel + ' control:' + control + ' value:' + value + ' status: ' + status + ' group:' + group);
@@ -73,11 +75,11 @@ HCI.vinylButtonHandler = function (channel, control, value, status) {
   if (value === ButtonState.pressed) {
     HCI.vinylMode = true;
     midi.sendShortMsg(0x90, 0x35, 0x7F); // LED Scratchmode
-    print('***** Scratch Mode ON');
+    print('***** Shift ON');
   } else {
     HCI.vinylMode = false;
     midi.sendShortMsg(0x80, 0x35, 0x00); // LED Scratchmode
-    print('***** Scratch Mode OFF');
+    print('*****  Shift OFF');
   }
 };
 
@@ -151,12 +153,12 @@ HCI.wheelTurn = function (channel, control, value, status, group) {
       engine.setValue(group, 'jog', newValue);
 
       if (!keyLockWasOn) { // keylock wasnt on, so kill it
-        if (!klTimer) { // kill the kelyock after a short while, as it uses a LOT of CPU
+        if (!HCI.keyLockTimer) { // kill the kelyock after a short while, as it uses a LOT of CPU
           engine.beginTimer(5000, function () {
             engine.setValue(group, 'keylock', 0);
-            klTimer = false;
+            HCI.keyLockTimer = false;
           }, true);
-          klTimer = true;
+          HCI.keyLockTimer = true;
         }
       }
     }
@@ -202,7 +204,7 @@ HCI.knobIncrement = function (group, action, minValue, maxValue, centralValue, s
 HCI.pitch = function (midino, control, value, status, group) {
   debug('pitch: ', midino, control, value, status, group);
   var speed = (HCI.vinylButton === true) ? '' : '_small';
-  var state = (value === 127) ? 1 : 0;
+  var state = (value === ButtonState.pressed) ? 1 : 0;
   switch (control) {
     case 0x11:
       HCI.pitchSwitches['A'][0] = state;
@@ -234,7 +236,7 @@ HCI.pitch = function (midino, control, value, status, group) {
 // Up/Down-Switches
 HCI.tempPitch = function (midino, control, value, status, group) {
   debug('tempPitch: ', midino, control, value, status, group);
-  var rate = (value === 127) ? 'rate_temp_down' : 'rate_temp_up';
+  var rate = (value === ButtonState.pressed) ? 'rate_temp_down' : 'rate_temp_up';
   if (HCI.vinylButton === false) {
     rate = rate + '_small';
   }
@@ -245,7 +247,7 @@ HCI.tempPitch = function (midino, control, value, status, group) {
 HCI.prevNext = function (midino, control, value, status, group) {
   debug('PrevNext:', midino, control, value, status, group);
 
-  var state = (value === 127) ? 1 : 0;
+  var state = (value === ButtonState.pressed) ? 1 : 0;
   switch (control) {
     case 0x13:
       HCI.prevNextSwitches['A'][0] = state;
@@ -289,11 +291,11 @@ HCI.prevNext = function (midino, control, value, status, group) {
 
 HCI.playlistModeFolder = function (channel, control, value, status, group) {
   debug('playlistModeFolder: ', channel, control, value, status, group);
-  if (value === 127) { // Button pressed
-    if (HCI.PlaylistMode === 'Folder') {
+  if (value === ButtonState.pressed) { // Button pressed
+    if (HCI.playlistMode === 'Folder') {
       engine.setValue(group, 'ToggleSelectedSidebarItem', true);
     } else {
-      HCI.PlaylistMode = 'Folder';
+      HCI.playlistMode = 'Folder';
     }
     midi.sendShortMsg(0x90, 0x39, 0x7F); // LED Folder
     midi.sendShortMsg(0x80, 0x38, 0x00); // LED File
@@ -302,30 +304,30 @@ HCI.playlistModeFolder = function (channel, control, value, status, group) {
 
 HCI.playlistModeFile = function (channel, control, value, status, group) {
   debug('playlistModeFile: ', channel, control, value, status, group);
-  if (value === 0x7F) { // Button pressed
-    if (HCI.PlaylistMode === 'File') {
+  if (value === ButtonState.pressed) { // Button pressed
+    if (HCI.playlistMode === 'File') {
       engine.setValue(group, 'LoadSelectedIntoFirstStopped', true);
     } else {
-      HCI.PlaylistMode = 'File';
+      HCI.playlistMode = 'File';
     }
     midi.sendShortMsg(0x80, 0x39, 0x00); // LED Folder
     midi.sendShortMsg(0x90, 0x38, 0x7F); // LED File
   }
 };
 
-HCI.PlaylistPrev = function (channel, control, value, status, group) {
-  print('HCI.PlaylistPrev ' + channel + ',' + control + ',' + value + ',' + status + ',' + group + '#');
-  if (value === 0x7F) { // Button pressed
-    if (HCI.PlaylistMode === 'File') {
+HCI.playlistPrev = function (channel, control, value, status, group) {
+  debug('HCI.playlistPrev: ', channel, control, value, status, group);
+  if (value === ButtonState.pressed) { // Button pressed
+    if (HCI.playlistMode === 'File') {
       if (!HCI.timerPlaylist) {
-        HCI.timerPlaylist = engine.beginTimer(100, 'HCI.PlaylistPrev(' + channel + ',' + control + ',' + value + ',' + status + ',"' + group + '")', false);
+        HCI.timerPlaylist = engine.beginTimer(250, 'HCI.playlistPrev(' + channel + ',' + control + ',' + value + ',' + status + ',"' + group + '")', false);
       }
       engine.setValue(group, 'SelectPrevTrack', true);
     } else {
-      if (HCI.PlaylistMode === 'Folder') {
+      if (HCI.playlistMode === 'Folder') {
         engine.setValue(group, 'SelectPrevPlaylist', true);
       } else {
-        print('Unknown PlaylistMode: ' + HCI.PlaylistMode);
+        print('Unknown playlistMode: ' + HCI.playlistMode);
       }
     }
   } else { // Buttonrelese
@@ -336,18 +338,19 @@ HCI.PlaylistPrev = function (channel, control, value, status, group) {
   }
 };
 
-HCI.PlaylistNext = function (channel, control, value, status, group) {
-  if (value === 0x7F) { // Button pressed
-    if (HCI.PlaylistMode === 'File') {
+HCI.playlistNext = function (channel, control, value, status, group) {
+  debug('HCI.playlistNext: ', channel, control, value, status, group);
+  if (value === ButtonState.pressed) { // Button pressed
+    if (HCI.playlistMode === 'File') {
       if (!HCI.timerPlaylist) {
-        HCI.timerPlaylist = engine.beginTimer(100, 'HCI.PlaylistNext(' + channel + ',' + control + ',' + value + ',' + status + ',"' + group + '")', false);
+        HCI.timerPlaylist = engine.beginTimer(250, 'HCI.playlistNext(' + channel + ',' + control + ',' + value + ',' + status + ',"' + group + '")', false);
       }
       engine.setValue(group, 'SelectNextTrack', true);
     } else {
-      if (HCI.PlaylistMode === 'Folder') {
+      if (HCI.playlistMode === 'Folder') {
         engine.setValue(group, 'SelectNextPlaylist', true);
       } else {
-        print('Unknown PlaylistMode: ' + HCI.PlaylistMode);
+        print('Unknown playlistMode: ' + HCI.playlistMode);
       }
     }
   } else { // Button relese
@@ -360,19 +363,34 @@ HCI.PlaylistNext = function (channel, control, value, status, group) {
 
 HCI.hotCue = function (midino, control, value, status, group) {
   debug('HCI.hotCue: ', midino, control, value, status, group);
-  var number = 1;
-  if (control === 0xe || control === 0x28) {
-    number = 2;
-  } else if (control === 0xf || control === 0x29) {
-    number = 3;
-  } else if (control === 0x10 || control === 0x2a) {
-    number = 4;
+  var number = 0;
+  switch (control) {
+    case 0x0D:
+    case 0x27:
+      number = 1;
+      break;
+    case 0x0E:
+    case 0x28:
+      number = 2;
+      break;
+    case 0x0F:
+    case 0x29:
+      number = 3;
+      break;
+    case 0x10:
+    case 0x2A:
+      number = 4;
+      break;
+    default:
+      break;
   }
+
   var action = 'hotcue_' + number + '_';
-  if (HCI.vinylButton === false) {
+  if (HCI.vinylMode === false) {
     action += 'activate';
   } else {
     action += 'clear';
   }
+  print(action);
   engine.setValue(group, action, value === 0x7F ? 1 : 0);
 };
