@@ -244,6 +244,37 @@ HCI.tempPitch = function (midino, control, value, status, group) {
   script.toggleControl(group, rate);
 };
 
+/**
+ * Pitch switches
+ * Push up / down turns tempo up / down
+ * Shift + push up / down turns pitch up / down
+ */
+HCI.pitchSwitch = function (channel, control, value, status, group) {
+  if (HCI.vinylButton === true) {
+    // Max values to keep sound "clean"
+    var maxPitch = 90.0;
+    var minPitch = -50.0;
+    var pitch = engine.getValue(group, 'pitch');
+    var incrementValue = (value == 0x7F) ? -0.1 : 0.1;
+    var newPitch = (parseFloat(pitch) + parseFloat(incrementValue));
+    newPitch = Math.round(newPitch * 100) / 100;
+
+    // Move key in boundaries
+    if ((incrementValue == 0.1 && newPitch <= maxPitch)
+      || (incrementValue == -0.1 && newPitch >= minPitch)
+    ) {
+      print('incrementValue : ' + incrementValue);
+      print('previous pitch : ' + pitch);
+      print('new pitch : ' + newPitch);
+      engine.setValue(group, 'pitch', newPitch);
+    }
+  } else {
+    var rate = (value === ButtonState.pressed) ? 'rate_perm_down' : 'rate_perm_up';
+    engine.setValue(group, rate, 1);
+    engine.setValue(group, rate, 0);
+  }
+};
+
 HCI.prevNext = function (midino, control, value, status, group) {
   debug('PrevNext:', midino, control, value, status, group);
 

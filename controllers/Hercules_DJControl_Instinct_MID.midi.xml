@@ -595,7 +595,7 @@
             </control>
             <control>
                 <group>[Channel2]</group>
-                <key>HCI.tempPitch</key>
+                <key>HCI.pitchSwitch</key>
                 <status>0xB0</status>
                 <midino>0x35</midino>
                 <options>
@@ -632,7 +632,7 @@
             </control>
             <control>
                 <group>[Channel1]</group>
-                <key>HCI.tempPitch</key>
+                <key>HCI.pitchSwitch</key>
                 <status>0xB0</status>
                 <midino>0x34</midino>
                 <options>

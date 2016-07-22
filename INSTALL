@@ -1,17 +1,8 @@
-copy .xml and .js file to the controller directory of mixxx.
-Reload defaults of the controller in options menue.
+copy .xml and .js file to the user controller directory of Mixxx
+Reload defaults of the controller in preferences menu.
 
-
-+ Windows:
-  - C:\Program Files\Mixxx\controllers
-+ Linux:
-  - /usr/share/mixxx/controllers in ubuntu
-  - or /usr/local/share/mixxx/controllers (other linux os)
-
-+ OS X:
-  - Assuming Mixxx has been installed to your Applications folder:
-  - 1. Go to Applications/
-  - 2. Control-click Mixxx, select "Show Package Contents"
-  - 3. Copy the above files to the folder Applications/Mixxx.app/Content/Resources/controllers/
-  
-  
+* GNU/Linux: /home/<username>/.mixxx/controllers
+* OS X: /Users/<username>/Library/Application Support/Mixxx/controllers
+* Windows: C:\Users\<username>\AppData\local\Mixxx\controllers. On Windows XP, replace Users with
+  Documents and Settings. The %USERPROFILE%\AppData folder is hidden, so if you have not already, you will
+  need to set Windows explorer to show hidden files and folders.
