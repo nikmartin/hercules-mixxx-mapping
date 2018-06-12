@@ -11,7 +11,7 @@
 // 0x80 = Note Off
 // 0x90 = Note On
 
-function HCI () {}
+function HCI () {};
 
 // ----------   Global variables    ----------
 //               [decka, deckb]
